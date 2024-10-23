@@ -1,16 +1,17 @@
 {
-    "avsender" : {
-        "Mottaker" : {
-            "tid" : {
-                "Melding" : "Klokken er 10:23:42 den tiened oktober 2024"
-            }
-        }
-    },
-    "Idris" : {
-        "Sander" : {
-            "10/10/24-10:23:42" : {
-                "Melding" : "Klokken er 10:23:42 den tiened oktober 2024"
-            }
-        }
+  "avsender": {
+    "Mottaker": {
+      "tid": "Meldingen"
     }
+  },
+  "Idris": {
+    "Sander": {
+      "10/10/24-10:23:42": "Klokken er 10:23:42 den tiened oktober 2024"
+    }
+  },
+  "Sander": {
+    "Asrom": {
+      "Tidspunktet": "Meldingen"
+    }
+  }
 }
