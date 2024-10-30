@@ -13,12 +13,15 @@ def CreateMessageObject(avsender: str, mottaker: str, melding: str):
     
     return obj
     
-def WriteMessageJSON(message: object):
+def WriteJSON(message: object):
     meldinger = {}
-    with open(os.get_exec_path() + "/meldinger.json", "r") as data:
+    with open(os.getcwd() + "/meldinger.json", "r") as data:
         meldinger = json.loads(data.read())
     
     meldinger.update(message)
     
-    with open(os.get_exec_path() + "/meldinger.json","w") as data:
-        json.dump(meldinger, data)   
+    
+    with open(os.getcwd() + "/meldinger.json","w") as data:
+        json.dump(meldinger, data)
+        
+
