@@ -10,7 +10,6 @@ def CreateMessageObject(avsender: str, mottaker: str, melding: str):
             }
         }
     }
-    
     return obj
     
 def WriteJSON(message: object):
@@ -20,8 +19,14 @@ def WriteJSON(message: object):
     
     meldinger.update(message)
     
-    
-    with open(os.getcwd() + "/meldinger.json","w") as data:
+    with open(os.get_exec_path() + "/meldinger.json","w") as data:
         json.dump(meldinger, data)
-        
 
+def FetchMessageJSON():
+    meldinger = {}
+    try:
+        with open(os.get_exec_path() + "/meldinger.json", "r") as data:
+            meldinger = json.loads(data.read())
+    except:
+        print("No message JSON found, skipping read")
+    return meldinger
