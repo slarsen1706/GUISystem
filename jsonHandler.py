@@ -20,19 +20,19 @@ def WriteJSON(message: object):
     sender = list(message.keys())[0]
     receiver = list(message[sender].keys())[0]
     if not sender in meldinger:
-        meldinger.Update(message)
+        meldinger.update(message)
     elif not receiver in meldinger[sender]:
         meldinger[sender].update(message[sender])
     else:
         meldinger[sender][receiver].update(message[sender][receiver])
         
-    with open(os.get_exec_path() + "/meldinger.json","w") as data:
+    with open(os.getcwd() + "/meldinger.json","w") as data:
         json.dump(meldinger, data)
 
 def FetchMessageJSON():
     meldinger = {}
     try:
-        with open(os.get_exec_path() + "/meldinger.json", "r") as data:
+        with open(os.getcwd() + "/meldinger.json", "r") as data:
             meldinger = json.loads(data.read())
     except:
         print("No message JSON found, skipping read")
