@@ -17,8 +17,15 @@ def WriteJSON(message: object):
     with open(os.getcwd() + "/meldinger.json", "r") as data:
         meldinger = json.loads(data.read())
     
-    meldinger.update(message)
-    
+    sender = message[message.keys[0]]
+    receiver = sender[sender.keys[0]]
+    if not message.keys[0] in meldinger:
+        meldinger.Update(message)
+    elif sender.keys[0] in meldinger[message.keys[0]]:
+        meldinger[message.keys[0]].update(sender)
+    else:
+        meldinger[message.keys[0]][sender.keys[0]].update(receiver[receiver.keys[0]])
+        
     with open(os.get_exec_path() + "/meldinger.json","w") as data:
         json.dump(meldinger, data)
 

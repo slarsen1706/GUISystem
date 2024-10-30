@@ -5,7 +5,7 @@ def send():
     avsender = input("Avsender: ").lower()
     mottaker = input("Mottaker: ").lower()
     melding = input("Meldingen: ").lower()
-
+    
     
     message = CreateMessageObject(avsender, mottaker, melding)
     
