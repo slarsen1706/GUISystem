@@ -12,7 +12,9 @@ class Contacts(object):
                 if (sender in self.contacts) or (receiver in self.contacts):
                     continue
                 #If either the sender or receiver is the user, add them in the contacts
-                if receiver == user or sender == user:
+                if receiver == user:
+                    self.contacts.append(sender)
+                elif sender == user:
                     self.contacts.append(receiver)
                     
     def UpdateContact(self):
