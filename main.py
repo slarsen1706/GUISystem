@@ -2,21 +2,24 @@ from jsonHandler import *
 from contacts import Contacts
 from tkinter import *
 import json
+import datetime
 
 user = "Sander"
 contacts = Contacts(user)
 mottaker_chat = user
 
-def endrePerson(btn):
-    print(btn)
-    person = btn
-    print(f"endret person til {btn}")
-    mottaker_chat = btn
+def endrePerson(indexBtn):
+    global mottaker_chat
+    person = contacts.contacts[indexBtn-1]
+    print(person)
+    mottaker_chat = person
+    chat_med.config(text=person)
     
 def send():
     avsender = user
     mottaker = mottaker_chat
     melding = entry.get()
+    entry.delete(0,END)
     message = CreateMessageObject(avsender, mottaker, melding)
     
     WriteJSON(message)
@@ -55,16 +58,18 @@ def updateChat():
     
     # Legg til venner i friends_frame
     messages = motta(user, mottaker_chat)
+    print(messages)
     for i in range(len(messages)):  # Eksempel med 6 personer som i bildet
         key = list(messages[i].keys())[0]
         message = messages[i]
+        print(message)
         Label(message_frame, text=message[key]['msg'], bg=("green" if messages[i][key]['from'] == user else "blue"), anchor="w").pack(anchor="w", padx=5)
 
           
 
 # Opprette hovedvinduet
 root = Tk()
-root.title("Overføre GUI fra Drawio til tkinter")
+root.title("Chat")
 root.config(bg="white")
 root.geometry("400x400")
 
@@ -76,7 +81,9 @@ main_frame.pack(fill=BOTH, expand=True)
 top_frame = Frame(main_frame, bg="pink", height=30)
 top_frame.grid(row=0, column=1, sticky="nsew", columnspan=2)
 top_frame.grid_columnconfigure(1, weight=1)
-Label(top_frame, text="Program navn", bg="white", font=("Arial", 12)).grid(row=0, column=1)
+# Label for å vite hvilken person du chatter med
+chat_med = Label(top_frame, text="person", bg="white", font=("Arial", 12))
+chat_med.grid(row=0, column=1)
 Label(top_frame, text=user, bg="white").grid(row=0, column=2, padx=5)
 
 # Venstre meny med venner-liste og scrollbar
@@ -104,7 +111,7 @@ btns = []
 for i in range(len(contacts.contacts)):  # Eksempel med 6 personer som i bildet
     btns.append(Button(friends_frame, text=venner[i], bg="white", anchor="w"))
     print(btns[-1])
-    btns[-1].config(command=lambda j=i+1: endrePerson(venner[i]))
+    btns[-1].config(command=lambda j=i+1: endrePerson(j))
     btns[-1].pack(anchor="w", padx=5)
 
 # Oppdatere scrollregionen til canvas
