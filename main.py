@@ -1,19 +1,19 @@
 from jsonHandler import *
+from contacts import Contacts
 import json
+
 
 def send():
     avsender = input("Avsender: ").lower()
     mottaker = input("Mottaker: ").lower()
     melding = input("Meldingen: ").lower()
-    
-    
     message = CreateMessageObject(avsender, mottaker, melding)
     
     WriteJSON(message)
     
     print(f"Melding sendt fra {avsender} til {mottaker}.")
 
-def motta():
+def motta(bruker1, bruker2):
     # Get the recipient's name from the user input
     mottaker = input("Skriv inn navnet ditt for å sjekke meldinger: ").lower()
 
@@ -52,4 +52,8 @@ def main():
             motta()
         elif handling == 'q':
             break
+
+user = "s"
+contacts = Contacts(user)
+
 main()
